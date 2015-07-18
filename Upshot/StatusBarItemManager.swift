@@ -17,7 +17,7 @@ class StatusBarItemManager : NSObject{
     var terminateMenuItem : NSMenuItem = NSMenuItem()
     
     var standbyImage = NSImage(named: "status-item-standby")
-    var successImage = NSImage(named: "status-item-ok")
+    var successImage = NSImage(named: "status-item-success")
     var failureImage = NSImage(named: "status-item-error")
     var sendingImage = NSImage(named: "status-item-sending")
     
