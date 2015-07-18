@@ -13,7 +13,8 @@ class StatusBarItemManager : NSObject{
     var statusBar = NSStatusBar.systemStatusBar()
     var statusBarItem : NSStatusItem = NSStatusItem()
     var menu: NSMenu = NSMenu()
-    var menuItem : NSMenuItem = NSMenuItem()
+    var settingsMenuItem : NSMenuItem = NSMenuItem()
+    var terminateMenuItem : NSMenuItem = NSMenuItem()
     
     var standbyImage = NSImage(named: "status-item-standby")
     var successImage = NSImage(named: "status-item-ok")
@@ -21,16 +22,22 @@ class StatusBarItemManager : NSObject{
     var sendingImage = NSImage(named: "status-item-sending")
     
     override init() {
+        super.init()
         
         statusBarItem = statusBar.statusItemWithLength(-1)
         statusBarItem.menu = menu
         statusBarItem.image = standbyImage
         
-        menuItem.title = "Quit"
-        menuItem.action = Selector("terminate:")
-        menuItem.keyEquivalent = ""
-        menuItem.enabled = true
-        menu.addItem(menuItem)
+        settingsMenuItem.title = "Settings"
+        settingsMenuItem.action = Selector("openSettings:")
+        settingsMenuItem.keyEquivalent = ""
+        settingsMenuItem.target = self
+        menu.addItem(settingsMenuItem)
+        
+        terminateMenuItem.title = "Quit"
+        terminateMenuItem.action = Selector("terminate:")
+        terminateMenuItem.keyEquivalent = ""
+        menu.addItem(terminateMenuItem)
         
     }
     
@@ -50,5 +57,9 @@ class StatusBarItemManager : NSObject{
     func success(time : NSTimeInterval = 2) -> Void {
         statusBarItem.image = successImage
         NSTimer.scheduledTimerWithTimeInterval(time, target: self, selector: Selector("reset:"), userInfo: nil, repeats: false)
+    }
+    
+    func openSettings(object: AnyObject) {
+
     }
 }
