@@ -1,3 +1,4 @@
+
 //
 //  AppDelegate.swift
 //  Upshot
@@ -13,12 +14,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMetadataQueryDelegate {
 
     let defaults = NSUserDefaults.standardUserDefaults()
     var monitor : Monitor!
+    let statusBarManager = StatusBarItemManager()
     
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         defaults.registerDefaults(["NSApplicationCrashOnExceptions": true])
 
-
-        
+         
         monitor = Monitor(callback: screenshotDetected)
         monitor.startMonitoring()
     }
@@ -26,10 +27,22 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMetadataQueryDelegate {
     
     func screenshotDetected(imageURL: NSURL) {
         let uploader = Uploader(file: imageURL)
-        uploader.upload()
+        statusBarManager.sending()
+        uploader.upload(screenshotUploadSuccess, error: screenshotUploadFailure)
+    }
+    
+    func screenshotUploadSuccess(url : String) {
+        let sound = NSSound(named: "success")
+        sound!.play()
+
+        statusBarManager.success()
+        ClipboardManager().save(url)
     }
 
-
+    func screenshotUploadFailure() {
+        statusBarManager.failure()
+        ClipboardManager().save("")
+    }
     func applicationWillTerminate(aNotification: NSNotification) {
     }
 }

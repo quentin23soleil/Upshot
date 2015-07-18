@@ -16,14 +16,17 @@ class Uploader {
     init(file : NSURL) {
         self.fileURL = file
     }
-    
-    func upload() -> Void {
+
+    func upload(success : String -> Void, error : Void -> Void) -> Void {
         let url = "http://quentin-dommerc.com/scrup/recv.php?name=" + fileURL.lastPathComponent!.stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet())!
         Alamofire.upload(.POST, URLString: url, file: fileURL)
             .responseString { (request, response, responseUrl, error) in
                 if let newUrl = responseUrl {
-                    ClipboardManager().save(newUrl)
+                    success(newUrl)
+                } else {
+                    error
                 }
+
         }
     }
     
