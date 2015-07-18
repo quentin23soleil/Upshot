@@ -86,6 +86,7 @@
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"
+      customArchiveName = "Upshot"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>
