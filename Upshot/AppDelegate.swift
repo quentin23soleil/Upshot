@@ -26,8 +26,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMetadataQueryDelegate {
     
     
     func screenshotDetected(imageURL: NSURL) {
-        let uploader = Uploader(file: imageURL)
         statusBarManager.sending()
+        let uploader = Uploader(file: imageURL)
         uploader.upload(screenshotUploadSuccess, error: screenshotUploadFailure)
     }
     
@@ -43,6 +43,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMetadataQueryDelegate {
         statusBarManager.failure()
         ClipboardManager().save("")
     }
+    
     func applicationWillTerminate(aNotification: NSNotification) {
     }
 }

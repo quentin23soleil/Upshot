@@ -25,6 +25,13 @@ class StatusBarItemManager : NSObject{
         statusBarItem = statusBar.statusItemWithLength(-1)
         statusBarItem.menu = menu
         statusBarItem.image = standbyImage
+        
+        menuItem.title = "Quit"
+        menuItem.action = Selector("terminate:")
+        menuItem.keyEquivalent = ""
+        menuItem.enabled = true
+        menu.addItem(menuItem)
+        
     }
     
     func reset(timer : NSTimer) {
