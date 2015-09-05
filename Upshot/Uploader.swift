@@ -17,8 +17,20 @@ class Uploader {
         self.fileURL = file
     }
 
+    private class func uploadURL(fileURL fileURL: NSURL) -> NSURL {
+        
+        var url = SettingsManager.sharedInstance.url
+        let fileNameURLSafe = fileURL.lastPathComponent!.stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet())!
+        
+        url = url.stringByReplacingOccurrencesOfString("%%%filename%%%", withString: fileNameURLSafe)
+        
+        return NSURL(string: url)!
+    }
+    
     func upload(success: String -> Void, errorCallback: Void -> Void) -> Void {
-        let url = "http://quentin-dommerc.com/scrup/recv.php?name=" + fileURL.lastPathComponent!.stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet())!
+        
+        let url = Uploader.uploadURL(fileURL: fileURL)
+        
         Alamofire.upload(.POST, url, file: fileURL)
             .responseString { (request, response, result) in
                 switch result {
