@@ -41,7 +41,7 @@ class Monitor {
             for item in itemsAdded {
                 // Get the path to the screenshot
                 if let screenshotPath = item.valueForAttribute(NSMetadataItemPathKey) as? String {
-                    let screenshotName = screenshotPath.lastPathComponent.stringByDeletingPathExtension
+                    let screenshotName = ((screenshotPath as NSString).lastPathComponent as NSString).stringByDeletingPathExtension
                     
                     // Blacklist the screenshot if it hasn't already been blacklisted
                     if !blacklist.contains(screenshotName) {
@@ -58,11 +58,11 @@ class Monitor {
                 // Get the path to the screenshot
                 if let path = item.valueForAttribute(NSMetadataItemPathKey) as? String,
                     let creationDate = item.valueForAttribute(NSMetadataItemFSCreationDateKey) as? NSDate {
-                        let screenshotName = path.lastPathComponent.stringByDeletingPathExtension
+                        let screenshotName = ((path as NSString).lastPathComponent as NSString).stringByDeletingPathExtension
                         
                         let oldestAllowedCreationDate = NSDate(timeIntervalSinceNow: -30) // 30 seconds ago
-                        let defaultScreenshotDirectoryPath = path.stringByDeletingLastPathComponent.stringByStandardizingPath
-                        let currentScreenshotDirectoryPath = screenshotDirectoryPath.stringByStandardizingPath
+                        let defaultScreenshotDirectoryPath = ((path as NSString).stringByDeletingLastPathComponent as NSString).stringByStandardizingPath
+                        let currentScreenshotDirectoryPath = (screenshotDirectoryPath as NSString).stringByStandardizingPath
                         
                         let isInScreenshotFolder = currentScreenshotDirectoryPath == defaultScreenshotDirectoryPath
                         let isRecentlyCreated = creationDate.compare(oldestAllowedCreationDate) == .OrderedDescending

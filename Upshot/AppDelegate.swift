@@ -28,7 +28,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMetadataQueryDelegate {
     func screenshotDetected(imageURL: NSURL) {
         statusBarManager.sending()
         let uploader = Uploader(file: imageURL)
-        uploader.upload(screenshotUploadSuccess, error: screenshotUploadFailure)
+        uploader.upload(screenshotUploadSuccess, errorCallback: screenshotUploadFailure)
     }
     
     func screenshotUploadSuccess(url : String) {

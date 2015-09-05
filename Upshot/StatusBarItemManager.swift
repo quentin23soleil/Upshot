@@ -60,6 +60,6 @@ class StatusBarItemManager : NSObject{
     }
     
     func openSettings(object: AnyObject) {
-
+        
     }
 }
