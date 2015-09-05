@@ -20,13 +20,20 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMetadataQueryDelegate {
     let settingsWindowController = Storyboards.Main.instantiateSettingsWindowController()
     
     func applicationDidFinishLaunching(aNotification: NSNotification) {
+        
         defaults.registerDefaults(["NSApplicationCrashOnExceptions": true])
-
-         
+        
         monitor = Monitor(callback: screenshotDetected)
         monitor.startMonitoring()
     }
     
+    func applicationWillTerminate(aNotification: NSNotification) {
+        
+        monitor.stopMonitoring()
+    }
+}
+
+extension AppDelegate {
     
     func screenshotDetected(imageURL: NSURL) {
         statusBarManager.sending()
@@ -36,20 +43,22 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMetadataQueryDelegate {
     }
     
     func screenshotUploadSuccess(url : String) {
-        let sound = NSSound(named: "success")
-        sound!.play()
-
+        
+        if SettingsManager.sharedInstance.playSound {
+            
+            let sound = NSSound(named: "success")
+            
+            sound!.play()
+        }
+        
         statusBarManager.success()
         ClipboardManager().save(url)
     }
-
+    
     func screenshotUploadFailure() {
+        
         statusBarManager.failure()
         ClipboardManager().save("")
-    }
-    
-    func applicationWillTerminate(aNotification: NSNotification) {
-        
     }
 }
 
