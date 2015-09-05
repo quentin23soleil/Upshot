@@ -8,6 +8,7 @@
 //
 
 import Cocoa
+import Foundation
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, NSMetadataQueryDelegate {
@@ -15,6 +16,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMetadataQueryDelegate {
     let defaults = NSUserDefaults.standardUserDefaults()
     var monitor : Monitor!
     let statusBarManager = StatusBarItemManager()
+    
+    let settingsWindowController = Storyboards.Main.instantiateSettingsWindowController()
     
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         defaults.registerDefaults(["NSApplicationCrashOnExceptions": true])
@@ -27,6 +30,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMetadataQueryDelegate {
     
     func screenshotDetected(imageURL: NSURL) {
         statusBarManager.sending()
+        
         let uploader = Uploader(file: imageURL)
         uploader.upload(screenshotUploadSuccess, errorCallback: screenshotUploadFailure)
     }
@@ -45,6 +49,25 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMetadataQueryDelegate {
     }
     
     func applicationWillTerminate(aNotification: NSNotification) {
+        
     }
 }
 
+extension AppDelegate {
+    
+    func showSettingsWindow() {
+        
+        NSApp.activateIgnoringOtherApps(true)
+
+        settingsWindowController.window?.center()
+        settingsWindowController.window?.hidesOnDeactivate = true
+        settingsWindowController.showWindow(nil)
+    }
+}
+
+extension NSApplication {
+    
+    var appDelegate: AppDelegate {
+        return delegate as! AppDelegate
+    }
+}

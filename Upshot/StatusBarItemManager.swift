@@ -24,7 +24,7 @@ class StatusBarItemManager : NSObject{
     override init() {
         super.init()
         
-        statusBarItem = statusBar.statusItemWithLength(-1)
+        statusBarItem = statusBar.statusItemWithLength(NSVariableStatusItemLength)
         statusBarItem.menu = menu
         statusBarItem.image = standbyImage
         
@@ -38,7 +38,6 @@ class StatusBarItemManager : NSObject{
         terminateMenuItem.action = Selector("terminate:")
         terminateMenuItem.keyEquivalent = ""
         menu.addItem(terminateMenuItem)
-        
     }
     
     func reset(timer : NSTimer) {
@@ -61,5 +60,6 @@ class StatusBarItemManager : NSObject{
     
     func openSettings(object: AnyObject) {
         
+        NSApp.appDelegate.showSettingsWindow()
     }
 }

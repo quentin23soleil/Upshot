@@ -20,6 +20,11 @@
 		ADAFBE541B57827900783BD3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAFBE531B57827900783BD3 /* ViewController.swift */; };
 		ADAFBE561B57827900783BD3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADAFBE551B57827900783BD3 /* Assets.xcassets */; };
 		ADAFBE591B57827900783BD3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADAFBE571B57827900783BD3 /* Main.storyboard */; };
+		F26A9BAC1B9AFDA400B12932 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26A9BAB1B9AFDA400B12932 /* SettingsViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		F26A9BAE1B9B5D9200B12932 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26A9BAD1B9B5D9200B12932 /* SettingsManager.swift */; settings = {ASSET_TAGS = (); }; };
+		F26A9BB01B9B624000B12932 /* PersistentStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26A9BAF1B9B624000B12932 /* PersistentStore.swift */; settings = {ASSET_TAGS = (); }; };
+		F270F7151B9AEC6F00564189 /* SettingsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F270F7141B9AEC6F00564189 /* SettingsWindowController.swift */; settings = {ASSET_TAGS = (); }; };
+		F270F7171B9AEF9800564189 /* Storyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = F270F7161B9AEF9800564189 /* Storyboards.swift */; settings = {ASSET_TAGS = (); }; };
 		FAE2278769C8B8957C7E573F /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CF5F4C5CC495B59EB8FF0A5 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -44,6 +49,11 @@
 		ADAFBE581B57827900783BD3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		ADAFBE5A1B57827900783BD3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BF62AC999E1785BE40B5DA9D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		F26A9BAB1B9AFDA400B12932 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		F26A9BAD1B9B5D9200B12932 /* SettingsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
+		F26A9BAF1B9B624000B12932 /* PersistentStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentStore.swift; sourceTree = "<group>"; };
+		F270F7141B9AEC6F00564189 /* SettingsWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsWindowController.swift; sourceTree = "<group>"; };
+		F270F7161B9AEF9800564189 /* Storyboards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboards.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,14 +105,19 @@
 			isa = PBXGroup;
 			children = (
 				ADAFBE511B57827900783BD3 /* AppDelegate.swift */,
+				F270F7161B9AEF9800564189 /* Storyboards.swift */,
+				F270F7141B9AEC6F00564189 /* SettingsWindowController.swift */,
+				F26A9BAB1B9AFDA400B12932 /* SettingsViewController.swift */,
+				F26A9BAD1B9B5D9200B12932 /* SettingsManager.swift */,
+				F26A9BAF1B9B624000B12932 /* PersistentStore.swift */,
 				ADAFBE531B57827900783BD3 /* ViewController.swift */,
-				ADAFBE551B57827900783BD3 /* Assets.xcassets */,
 				ADAFBE571B57827900783BD3 /* Main.storyboard */,
-				ADAFBE5A1B57827900783BD3 /* Info.plist */,
 				AD77BAD51B596FA90013F60D /* Monitor.swift */,
 				AD77BAD71B5970DE0013F60D /* Uploader.swift */,
 				AD4657621B59834400117F4C /* ClipboardManager.swift */,
 				AD16E4401B5A139500E0FB17 /* StatusBarItemManager.swift */,
+				ADAFBE5A1B57827900783BD3 /* Info.plist */,
+				ADAFBE551B57827900783BD3 /* Assets.xcassets */,
 			);
 			path = Upshot;
 			sourceTree = "<group>";
@@ -242,12 +257,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F270F7171B9AEF9800564189 /* Storyboards.swift in Sources */,
 				AD4657631B59834400117F4C /* ClipboardManager.swift in Sources */,
+				F270F7151B9AEC6F00564189 /* SettingsWindowController.swift in Sources */,
 				AD77BAD61B596FA90013F60D /* Monitor.swift in Sources */,
 				AD16E4411B5A139500E0FB17 /* StatusBarItemManager.swift in Sources */,
 				AD77BAD81B5970DE0013F60D /* Uploader.swift in Sources */,
+				F26A9BAE1B9B5D9200B12932 /* SettingsManager.swift in Sources */,
 				ADAFBE541B57827900783BD3 /* ViewController.swift in Sources */,
+				F26A9BB01B9B624000B12932 /* PersistentStore.swift in Sources */,
 				ADAFBE521B57827900783BD3 /* AppDelegate.swift in Sources */,
+				F26A9BAC1B9AFDA400B12932 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
