@@ -16,10 +16,6 @@ struct Storyboards {
             return NSStoryboard(name: self.identifier, bundle: nil)
         }
 
-        static func instantiateInitialController() -> SettingsWindowController {
-            return self.storyboard.instantiateInitialController() as! SettingsWindowController
-        }
-
         static func instantiateWindowControllerWithIdentifier(identifier: String) -> NSWindowController {
             return self.storyboard.instantiateControllerWithIdentifier(identifier) as! NSWindowController
         }
@@ -132,4 +128,4 @@ extension NSWindowController {
 
 //MARK: - SettingsWindowController
 
-//MARK: - ViewController
+//MARK: - SettingsViewController
