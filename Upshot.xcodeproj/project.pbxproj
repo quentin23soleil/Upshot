@@ -17,7 +17,6 @@
 		AD77BAD81B5970DE0013F60D /* Uploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD77BAD71B5970DE0013F60D /* Uploader.swift */; };
 		ADA0E6F11B5A083A00D0B736 /* success.wav in Resources */ = {isa = PBXBuildFile; fileRef = ADA0E6F01B5A083A00D0B736 /* success.wav */; };
 		ADAFBE521B57827900783BD3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAFBE511B57827900783BD3 /* AppDelegate.swift */; };
-		ADAFBE541B57827900783BD3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAFBE531B57827900783BD3 /* ViewController.swift */; };
 		ADAFBE561B57827900783BD3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADAFBE551B57827900783BD3 /* Assets.xcassets */; };
 		ADAFBE591B57827900783BD3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADAFBE571B57827900783BD3 /* Main.storyboard */; };
 		F26A9BAC1B9AFDA400B12932 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26A9BAB1B9AFDA400B12932 /* SettingsViewController.swift */; settings = {ASSET_TAGS = (); }; };
@@ -44,7 +43,6 @@
 		ADA0E6F01B5A083A00D0B736 /* success.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = success.wav; path = Media.xcassets/success.wav; sourceTree = "<group>"; };
 		ADAFBE4E1B57827900783BD3 /* Upshot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Upshot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADAFBE511B57827900783BD3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		ADAFBE531B57827900783BD3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		ADAFBE551B57827900783BD3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ADAFBE581B57827900783BD3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		ADAFBE5A1B57827900783BD3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -110,7 +108,6 @@
 				F26A9BAB1B9AFDA400B12932 /* SettingsViewController.swift */,
 				F26A9BAD1B9B5D9200B12932 /* SettingsManager.swift */,
 				F26A9BAF1B9B624000B12932 /* PersistentStore.swift */,
-				ADAFBE531B57827900783BD3 /* ViewController.swift */,
 				ADAFBE571B57827900783BD3 /* Main.storyboard */,
 				AD77BAD51B596FA90013F60D /* Monitor.swift */,
 				AD77BAD71B5970DE0013F60D /* Uploader.swift */,
@@ -264,7 +261,6 @@
 				AD16E4411B5A139500E0FB17 /* StatusBarItemManager.swift in Sources */,
 				AD77BAD81B5970DE0013F60D /* Uploader.swift in Sources */,
 				F26A9BAE1B9B5D9200B12932 /* SettingsManager.swift in Sources */,
-				ADAFBE541B57827900783BD3 /* ViewController.swift in Sources */,
 				F26A9BB01B9B624000B12932 /* PersistentStore.swift in Sources */,
 				ADAFBE521B57827900783BD3 /* AppDelegate.swift in Sources */,
 				F26A9BAC1B9AFDA400B12932 /* SettingsViewController.swift in Sources */,
