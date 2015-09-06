@@ -24,6 +24,7 @@
 		F26A9BB01B9B624000B12932 /* PersistentStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26A9BAF1B9B624000B12932 /* PersistentStore.swift */; settings = {ASSET_TAGS = (); }; };
 		F270F7151B9AEC6F00564189 /* SettingsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F270F7141B9AEC6F00564189 /* SettingsWindowController.swift */; settings = {ASSET_TAGS = (); }; };
 		F270F7171B9AEF9800564189 /* Storyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = F270F7161B9AEF9800564189 /* Storyboards.swift */; settings = {ASSET_TAGS = (); }; };
+		F285D8161B9CC236007724DF /* LaunchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F285D8151B9CC236007724DF /* LaunchManager.swift */; settings = {ASSET_TAGS = (); }; };
 		FAE2278769C8B8957C7E573F /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CF5F4C5CC495B59EB8FF0A5 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -52,6 +53,7 @@
 		F26A9BAF1B9B624000B12932 /* PersistentStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentStore.swift; sourceTree = "<group>"; };
 		F270F7141B9AEC6F00564189 /* SettingsWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsWindowController.swift; sourceTree = "<group>"; };
 		F270F7161B9AEF9800564189 /* Storyboards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboards.swift; sourceTree = "<group>"; };
+		F285D8151B9CC236007724DF /* LaunchManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 				AD77BAD71B5970DE0013F60D /* Uploader.swift */,
 				AD4657621B59834400117F4C /* ClipboardManager.swift */,
 				AD16E4401B5A139500E0FB17 /* StatusBarItemManager.swift */,
+				F285D8151B9CC236007724DF /* LaunchManager.swift */,
 				ADAFBE5A1B57827900783BD3 /* Info.plist */,
 				ADAFBE551B57827900783BD3 /* Assets.xcassets */,
 			);
@@ -261,6 +264,7 @@
 				AD16E4411B5A139500E0FB17 /* StatusBarItemManager.swift in Sources */,
 				AD77BAD81B5970DE0013F60D /* Uploader.swift in Sources */,
 				F26A9BAE1B9B5D9200B12932 /* SettingsManager.swift in Sources */,
+				F285D8161B9CC236007724DF /* LaunchManager.swift in Sources */,
 				F26A9BB01B9B624000B12932 /* PersistentStore.swift in Sources */,
 				ADAFBE521B57827900783BD3 /* AppDelegate.swift in Sources */,
 				F26A9BAC1B9AFDA400B12932 /* SettingsViewController.swift in Sources */,

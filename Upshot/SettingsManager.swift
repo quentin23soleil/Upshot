@@ -21,6 +21,12 @@ class SettingsManager {
     var launchAtLogin: Bool {
         didSet {
             PersistentStore.saveStandardObject(launchAtLogin, key: Key.LaunchAtLogin)
+            if launchAtLogin {
+                LaunchManager.launchAtStartUp()
+            }
+            else {
+                LaunchManager.removeLaunchAtStartUp()
+            }
         }
     }
     
