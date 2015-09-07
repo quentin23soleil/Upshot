@@ -9,10 +9,6 @@
 /* Begin PBXBuildFile section */
 		AD16E4411B5A139500E0FB17 /* StatusBarItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD16E4401B5A139500E0FB17 /* StatusBarItemManager.swift */; };
 		AD4657631B59834400117F4C /* ClipboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4657621B59834400117F4C /* ClipboardManager.swift */; };
-		AD49D9731B5A3EE7002794DB /* status-item-error.png in Resources */ = {isa = PBXBuildFile; fileRef = AD49D95F1B5A3EE7002794DB /* status-item-error.png */; };
-		AD49D9781B5A3EE7002794DB /* status-item-sending.png in Resources */ = {isa = PBXBuildFile; fileRef = AD49D9641B5A3EE7002794DB /* status-item-sending.png */; };
-		AD49D97D1B5A3EE7002794DB /* status-item-standby.png in Resources */ = {isa = PBXBuildFile; fileRef = AD49D9691B5A3EE7002794DB /* status-item-standby.png */; };
-		AD49D9821B5A3EE7002794DB /* status-item-success.png in Resources */ = {isa = PBXBuildFile; fileRef = AD49D96E1B5A3EE7002794DB /* status-item-success.png */; };
 		AD77BAD61B596FA90013F60D /* Monitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD77BAD51B596FA90013F60D /* Monitor.swift */; };
 		AD77BAD81B5970DE0013F60D /* Uploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD77BAD71B5970DE0013F60D /* Uploader.swift */; };
 		ADA0E6F11B5A083A00D0B736 /* success.wav in Resources */ = {isa = PBXBuildFile; fileRef = ADA0E6F01B5A083A00D0B736 /* success.wav */; };
@@ -35,10 +31,6 @@
 		AD46575E1B59792E00117F4C /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "Pods/../build/Debug-iphoneos/Pods/Alamofire.framework"; sourceTree = "<group>"; };
 		AD4657601B59798800117F4C /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "Pods/../build/Debug-iphoneos/Pods/Alamofire.framework"; sourceTree = "<group>"; };
 		AD4657621B59834400117F4C /* ClipboardManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipboardManager.swift; sourceTree = "<group>"; };
-		AD49D95F1B5A3EE7002794DB /* status-item-error.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "status-item-error.png"; sourceTree = "<group>"; };
-		AD49D9641B5A3EE7002794DB /* status-item-sending.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "status-item-sending.png"; sourceTree = "<group>"; };
-		AD49D9691B5A3EE7002794DB /* status-item-standby.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "status-item-standby.png"; sourceTree = "<group>"; };
-		AD49D96E1B5A3EE7002794DB /* status-item-success.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "status-item-success.png"; sourceTree = "<group>"; };
 		AD77BAD51B596FA90013F60D /* Monitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Monitor.swift; sourceTree = "<group>"; };
 		AD77BAD71B5970DE0013F60D /* Uploader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Uploader.swift; sourceTree = "<group>"; };
 		ADA0E6F01B5A083A00D0B736 /* success.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = success.wav; path = Media.xcassets/success.wav; sourceTree = "<group>"; };
@@ -81,10 +73,6 @@
 		ADAFBE451B57827900783BD3 = {
 			isa = PBXGroup;
 			children = (
-				AD49D95F1B5A3EE7002794DB /* status-item-error.png */,
-				AD49D9641B5A3EE7002794DB /* status-item-sending.png */,
-				AD49D9691B5A3EE7002794DB /* status-item-standby.png */,
-				AD49D96E1B5A3EE7002794DB /* status-item-success.png */,
 				ADA0E6F01B5A083A00D0B736 /* success.wav */,
 				ADAFBE501B57827900783BD3 /* Upshot */,
 				ADAFBE4F1B57827900783BD3 /* Products */,
@@ -192,13 +180,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD49D9821B5A3EE7002794DB /* status-item-success.png in Resources */,
-				AD49D97D1B5A3EE7002794DB /* status-item-standby.png in Resources */,
 				ADA0E6F11B5A083A00D0B736 /* success.wav in Resources */,
 				ADAFBE561B57827900783BD3 /* Assets.xcassets in Resources */,
 				ADAFBE591B57827900783BD3 /* Main.storyboard in Resources */,
-				AD49D9731B5A3EE7002794DB /* status-item-error.png in Resources */,
-				AD49D9781B5A3EE7002794DB /* status-item-sending.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
