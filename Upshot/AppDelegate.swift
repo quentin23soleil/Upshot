@@ -21,6 +21,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMetadataQueryDelegate {
     
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         
+        quitIfAlreadyRunning()
+        
         defaults.registerDefaults(["NSApplicationCrashOnExceptions": true])
         
         monitor = Monitor(callback: screenshotDetected)
@@ -29,7 +31,21 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMetadataQueryDelegate {
     
     func applicationWillTerminate(aNotification: NSNotification) {
         
-        monitor.stopMonitoring()
+        monitor?.stopMonitoring()
+    }
+}
+
+extension AppDelegate {
+    
+    func quitIfAlreadyRunning() {
+        if NSRunningApplication.runningApplicationsWithBundleIdentifier(NSBundle.mainBundle().bundleIdentifier!).count > 1 {
+            
+            let appName = NSBundle.mainBundle().objectForInfoDictionaryKey(kCFBundleNameKey as String) as! String
+            let alert = NSAlert()
+            alert.messageText = "An instance of \(appName) is already running"
+            alert.runModal()
+            NSApp.terminate(nil)
+        }
     }
 }
 
