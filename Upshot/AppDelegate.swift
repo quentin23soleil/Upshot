@@ -85,7 +85,6 @@ extension AppDelegate {
         NSApp.activateIgnoringOtherApps(true)
 
         settingsWindowController.window?.center()
-        settingsWindowController.window?.hidesOnDeactivate = true
         settingsWindowController.showWindow(nil)
     }
 }
