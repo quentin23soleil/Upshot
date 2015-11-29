@@ -11,6 +11,11 @@ import Alamofire
 
 class Uploader {
     
+    enum Response {
+        case Success(String)
+        case Failure
+    }
+    
     var fileURL : NSURL
     
     init(file : NSURL) {
@@ -27,7 +32,7 @@ class Uploader {
         return NSURL(string: url)!
     }
     
-    func upload(success: String -> Void, errorCallback: Void -> Void) -> Void {
+    func upload(callback callback: Response -> Void) {
         
         let url = Uploader.uploadURL(fileURL: fileURL)
         
@@ -35,11 +40,10 @@ class Uploader {
             .responseString { (request, response, result) in
                 switch result {
                 case .Success(let responseUrl):
-                    success(responseUrl)
+                    callback(.Success(responseUrl))
                 case .Failure(_, _):
-                    errorCallback()
+                    callback(.Failure)
                 }
-                
         }
     }    
 }

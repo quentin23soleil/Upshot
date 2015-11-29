@@ -52,29 +52,39 @@ extension AppDelegate {
 extension AppDelegate {
     
     func screenshotDetected(imageURL: NSURL) {
+        
+        upload(imageURL)
+    }
+}
+
+extension AppDelegate {
+    
+    func upload(fileURL: NSURL) {
+        
         statusBarManager.sending()
         
-        let uploader = Uploader(file: imageURL)
-        uploader.upload(screenshotUploadSuccess, errorCallback: screenshotUploadFailure)
+        let uploader = Uploader(file: fileURL)
+        uploader.upload(callback: uploadFinished)
     }
     
-    func screenshotUploadSuccess(url : String) {
+    func uploadFinished(response: Uploader.Response) {
         
-        if SettingsManager.sharedInstance.playSound {
+        switch response {
+        case .Success(let urlString):
+            if SettingsManager.sharedInstance.playSound {
+                
+                let sound = NSSound(named: "success")
+                
+                sound!.play()
+            }
             
-            let sound = NSSound(named: "success")
+            statusBarManager.success()
+            ClipboardManager().save(urlString)
             
-            sound!.play()
+        case .Failure:
+            statusBarManager.failure()
+            ClipboardManager().save("")
         }
-        
-        statusBarManager.success()
-        ClipboardManager().save(url)
-    }
-    
-    func screenshotUploadFailure() {
-        
-        statusBarManager.failure()
-        ClipboardManager().save("")
     }
 }
 
