@@ -34,6 +34,8 @@ class StatusBarItemManager : NSObject{
         settingsMenuItem.target = self
         menu.addItem(settingsMenuItem)
         
+        menu.addItem(NSMenuItem.separatorItem())
+        
         terminateMenuItem.title = "Quit"
         terminateMenuItem.action = Selector("terminate:")
         terminateMenuItem.keyEquivalent = ""
