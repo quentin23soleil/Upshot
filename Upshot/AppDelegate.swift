@@ -95,3 +95,4 @@ extension NSApplication {
         return delegate as! AppDelegate
     }
 }
+

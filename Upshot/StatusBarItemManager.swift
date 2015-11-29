@@ -65,3 +65,4 @@ class StatusBarItemManager : NSObject{
         NSApp.appDelegate.showSettingsWindow()
     }
 }
+

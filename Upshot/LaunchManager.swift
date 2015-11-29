@@ -64,3 +64,4 @@ class LaunchManager {
         return false
     }
 }
+

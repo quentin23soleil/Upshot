@@ -50,3 +50,4 @@ class SettingsManager {
         playSound = PersistentStore.getBool(key: Key.PlaySound) ?? true
     }
 }
+

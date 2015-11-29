@@ -91,3 +91,4 @@ class Monitor {
         return NSSearchPathForDirectoriesInDomains(.DesktopDirectory, .UserDomainMask, true)[0]
     }
 }
+

@@ -48,3 +48,4 @@ extension SettingsViewController {
         SettingsManager.sharedInstance.playSound = playSoundButton.state == NSOnState
     }
 }
+

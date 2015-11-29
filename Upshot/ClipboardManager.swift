@@ -24,3 +24,4 @@ class ClipboardManager {
         pasteBoard.setString(str, forType: NSPasteboardTypeString)
     }
 }
+
