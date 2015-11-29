@@ -45,7 +45,7 @@ class SettingsManager {
     
     init() {
         
-        url = PersistentStore.getString(key: Key.URL) ?? "http://quentin-dommerc.com/scrup/recv.php?name=%%%filename%%%"
+        url = PersistentStore.getString(key: Key.URL) ?? ""
         launchAtLogin = PersistentStore.getBool(key: Key.LaunchAtLogin) ?? false
         playSound = PersistentStore.getBool(key: Key.PlaySound) ?? true
     }
