@@ -28,6 +28,9 @@ class StatusBarItemManager : NSObject{
         statusBarItem.menu = menu
         statusBarItem.image = standbyImage
         
+        statusBarItem.button?.window?.registerForDraggedTypes([NSFilenamesPboardType])
+        statusBarItem.button?.window?.delegate = self
+        
         settingsMenuItem.title = "Settings"
         settingsMenuItem.action = Selector("openSettings:")
         settingsMenuItem.keyEquivalent = ""
@@ -63,6 +66,53 @@ class StatusBarItemManager : NSObject{
     func openSettings(object: AnyObject) {
         
         NSApp.appDelegate.showSettingsWindow()
+    }
+}
+
+extension StatusBarItemManager: NSWindowDelegate {
+    
+}
+
+extension StatusBarItemManager: NSDraggingDestination {
+    
+    func draggingEntered(sender: NSDraggingInfo) -> NSDragOperation {
+        return NSDragOperation.Copy
+    }
+    
+    func performDragOperation(sender: NSDraggingInfo) -> Bool {
+        
+        let pasteBoard = sender.draggingPasteboard()
+        
+        if let types = pasteBoard.types where types.contains(NSFilenamesPboardType),
+            let files = pasteBoard.propertyListForType(NSFilenamesPboardType) as? [String] {
+            
+            for file in files {
+                
+                var isDir = ObjCBool(false)
+                if NSFileManager.defaultManager().fileExistsAtPath(file, isDirectory: &isDir) && isDir.boolValue == false {
+                    do {
+                        let attributes = try NSFileManager.defaultManager().attributesOfItemAtPath(file)
+                        
+                        if let fileSize = attributes[NSFileSize] as? UInt {
+                            
+                            if fileSize < 5 * 1024 * 1024 {
+                                
+                                let url = NSURL(fileURLWithPath: file)
+                                
+                                NSApp.appDelegate.upload(url)
+                            }
+                            else {
+                                // TODO: Ask user if they really want to upload a big file
+                            }
+                        }
+                    }
+                    catch {
+                    }
+                }
+            }
+        }
+        
+        return true
     }
 }
 
