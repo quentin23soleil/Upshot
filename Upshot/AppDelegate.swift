@@ -13,23 +13,23 @@ import Foundation
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, NSMetadataQueryDelegate {
 
-    let defaults = NSUserDefaults.standardUserDefaults()
+    let defaults = UserDefaults.standard
     var monitor : Monitor!
     let statusBarManager = StatusBarItemManager()
     
     let settingsWindowController = Storyboards.Main.instantiateSettingsWindowController()
     
-    func applicationDidFinishLaunching(aNotification: NSNotification) {
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
         
         quitIfAlreadyRunning()
         
-        defaults.registerDefaults(["NSApplicationCrashOnExceptions": true])
+        defaults.register(defaults: ["NSApplicationCrashOnExceptions": true])
         
         monitor = Monitor(callback: screenshotDetected)
         monitor.startMonitoring()
     }
     
-    func applicationWillTerminate(aNotification: NSNotification) {
+    func applicationWillTerminate(_ aNotification: Notification) {
         
         monitor?.stopMonitoring()
     }
@@ -38,9 +38,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMetadataQueryDelegate {
 extension AppDelegate {
     
     func quitIfAlreadyRunning() {
-        if NSRunningApplication.runningApplicationsWithBundleIdentifier(NSBundle.mainBundle().bundleIdentifier!).count > 1 {
+        if NSRunningApplication.runningApplications(withBundleIdentifier: Bundle.main.bundleIdentifier!).count > 1 {
             
-            let appName = NSBundle.mainBundle().objectForInfoDictionaryKey(kCFBundleNameKey as String) as! String
+            let appName = Bundle.main.object(forInfoDictionaryKey: kCFBundleNameKey as String) as! String
             let alert = NSAlert()
             alert.messageText = "An instance of \(appName) is already running"
             alert.runModal()
@@ -51,7 +51,7 @@ extension AppDelegate {
 
 extension AppDelegate {
     
-    func screenshotDetected(imageURL: NSURL) {
+    func screenshotDetected(_ imageURL: URL) {
         
         upload(imageURL)
     }
@@ -59,7 +59,7 @@ extension AppDelegate {
 
 extension AppDelegate {
     
-    func upload(fileURL: NSURL) {
+    func upload(_ fileURL: URL) {
         
         statusBarManager.sending()
         
@@ -67,10 +67,10 @@ extension AppDelegate {
         uploader.upload(callback: uploadFinished)
     }
     
-    func uploadFinished(response: Uploader.Response) {
+    func uploadFinished(_ response: Uploader.Response) {
         
         switch response {
-        case .Success(let urlString):
+        case .success(let urlString):
             if SettingsManager.sharedInstance.playSound {
                 
                 let sound = NSSound(named: "success")
@@ -81,7 +81,7 @@ extension AppDelegate {
             statusBarManager.success()
             ClipboardManager().save(urlString)
             
-        case .Failure:
+        case .failure:
             statusBarManager.failure()
             ClipboardManager().save("")
         }
@@ -92,7 +92,7 @@ extension AppDelegate {
     
     func showSettingsWindow() {
         
-        NSApp.activateIgnoringOtherApps(true)
+        NSApp.activate(ignoringOtherApps: true)
 
         settingsWindowController.window?.center()
         settingsWindowController.showWindow(nil)

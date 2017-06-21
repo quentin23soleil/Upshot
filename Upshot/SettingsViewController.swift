@@ -27,7 +27,7 @@ class SettingsViewController: NSViewController {
 
 extension SettingsViewController: NSTextFieldDelegate {
     
-    override func controlTextDidChange(obj: NSNotification) {
+    override func controlTextDidChange(_ obj: Notification) {
         
         SettingsManager.sharedInstance.url = urlTextField.stringValue
     }
@@ -35,7 +35,7 @@ extension SettingsViewController: NSTextFieldDelegate {
 
 extension SettingsViewController {
     
-    @IBAction func launchAtLoginChangeAction(sender: NSButton) {
+    @IBAction func launchAtLoginChangeAction(_ sender: NSButton) {
         
         SettingsManager.sharedInstance.launchAtLogin = launchAtLoginButton.state == NSOnState
     }
@@ -43,7 +43,7 @@ extension SettingsViewController {
 
 extension SettingsViewController {
     
-    @IBAction func playSoundChangeButton(sender: NSButton) {
+    @IBAction func playSoundChangeButton(_ sender: NSButton) {
         
         SettingsManager.sharedInstance.playSound = playSoundButton.state == NSOnState
     }

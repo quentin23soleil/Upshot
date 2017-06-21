@@ -12,39 +12,38 @@ import Alamofire
 class Uploader {
     
     enum Response {
-        case Success(String)
-        case Failure
+        case success(String)
+        case failure
     }
     
-    var fileURL : NSURL
+    var fileURL : URL
     
-    init(file : NSURL) {
+    init(file : URL) {
         self.fileURL = file
     }
 
-    private class func uploadURL(fileURL fileURL: NSURL) -> NSURL {
+    fileprivate class func uploadURL(fileURL: URL) -> URL {
         
         var url = SettingsManager.sharedInstance.url
-        let fileNameURLSafe = fileURL.lastPathComponent!.stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet())!
+        let fileNameURLSafe = fileURL.lastPathComponent.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
         
-        url = url.stringByReplacingOccurrencesOfString("%%%filename%%%", withString: fileNameURLSafe)
+        url = url.replacingOccurrences(of: "%%%filename%%%", with: fileNameURLSafe)
         
-        return NSURL(string: url)!
+        return URL(string: url)!
     }
     
-    func upload(callback callback: Response -> Void) {
+    func upload(callback: @escaping (Response) -> Void) {
         
         let url = Uploader.uploadURL(fileURL: fileURL)
         
-        Alamofire.upload(.POST, url, file: fileURL)
-            .responseString { (request, response, result) in
-                switch result {
-                case .Success(let responseUrl):
-                    callback(.Success(responseUrl))
-                case .Failure(_, _):
-                    callback(.Failure)
-                }
-        }
-    }    
+        Alamofire.upload(fileURL, to: url).responseString(completionHandler: {response in
+            
+            if let result = response.result.value {
+                callback(.success(result))
+            } else {
+                callback(.failure)
+            }
+        })
+    }
 }
 

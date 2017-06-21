@@ -10,7 +10,7 @@ import Foundation
 import Cocoa
 
 class StatusBarItemManager : NSObject{
-    var statusBar = NSStatusBar.systemStatusBar()
+    var statusBar = NSStatusBar.system()
     var statusBarItem : NSStatusItem = NSStatusItem()
     var menu: NSMenu = NSMenu()
     var settingsMenuItem : NSMenuItem = NSMenuItem()
@@ -24,7 +24,7 @@ class StatusBarItemManager : NSObject{
     override init() {
         super.init()
         
-        statusBarItem = statusBar.statusItemWithLength(NSVariableStatusItemLength)
+        statusBarItem = statusBar.statusItem(withLength: NSVariableStatusItemLength)
         statusBarItem.menu = menu
         statusBarItem.image = standbyImage
         
@@ -32,38 +32,38 @@ class StatusBarItemManager : NSObject{
         statusBarItem.button?.window?.delegate = self
         
         settingsMenuItem.title = "Settings"
-        settingsMenuItem.action = Selector("openSettings:")
+        settingsMenuItem.action = #selector(StatusBarItemManager.openSettings(_:))
         settingsMenuItem.keyEquivalent = ""
         settingsMenuItem.target = self
         menu.addItem(settingsMenuItem)
         
-        menu.addItem(NSMenuItem.separatorItem())
+        menu.addItem(NSMenuItem.separator())
         
         terminateMenuItem.title = "Quit"
-        terminateMenuItem.action = Selector("terminate:")
+        terminateMenuItem.action = #selector(NSApplication.shared().terminate)
         terminateMenuItem.keyEquivalent = ""
         menu.addItem(terminateMenuItem)
     }
     
-    func reset(timer : NSTimer) {
+    func reset(_ timer : Timer) {
         statusBarItem.image = standbyImage
     }
     
-    func sending(time : NSTimeInterval = 2) -> Void {
+    func sending(_ time : TimeInterval = 2) -> Void {
         statusBarItem.image = sendingImage
     }
     
-    func failure(time : NSTimeInterval = 2) -> Void {
+    func failure(_ time : TimeInterval = 2) -> Void {
         statusBarItem.image = failureImage
-        NSTimer.scheduledTimerWithTimeInterval(time, target: self, selector: Selector("reset:"), userInfo: nil, repeats: false)
+        Timer.scheduledTimer(timeInterval: time, target: self, selector: #selector(StatusBarItemManager.reset(_:)), userInfo: nil, repeats: false)
     }
     
-    func success(time : NSTimeInterval = 2) -> Void {
+    func success(_ time : TimeInterval = 2) -> Void {
         statusBarItem.image = successImage
-        NSTimer.scheduledTimerWithTimeInterval(time, target: self, selector: Selector("reset:"), userInfo: nil, repeats: false)
+        Timer.scheduledTimer(timeInterval: time, target: self, selector: #selector(StatusBarItemManager.reset(_:)), userInfo: nil, repeats: false)
     }
     
-    func openSettings(object: AnyObject) {
+    func openSettings(_ object: AnyObject) {
         
         NSApp.appDelegate.showSettingsWindow()
     }
@@ -75,29 +75,29 @@ extension StatusBarItemManager: NSWindowDelegate {
 
 extension StatusBarItemManager: NSDraggingDestination {
     
-    func draggingEntered(sender: NSDraggingInfo) -> NSDragOperation {
-        return NSDragOperation.Copy
+    func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
+        return NSDragOperation.copy
     }
     
-    func performDragOperation(sender: NSDraggingInfo) -> Bool {
+    func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
         
         let pasteBoard = sender.draggingPasteboard()
         
-        if let types = pasteBoard.types where types.contains(NSFilenamesPboardType),
-            let files = pasteBoard.propertyListForType(NSFilenamesPboardType) as? [String] {
+        if let types = pasteBoard.types, types.contains(NSFilenamesPboardType),
+            let files = pasteBoard.propertyList(forType: NSFilenamesPboardType) as? [String] {
             
             for file in files {
                 
                 var isDir = ObjCBool(false)
-                if NSFileManager.defaultManager().fileExistsAtPath(file, isDirectory: &isDir) && isDir.boolValue == false {
+                if FileManager.default.fileExists(atPath: file, isDirectory: &isDir) && isDir.boolValue == false {
                     do {
-                        let attributes = try NSFileManager.defaultManager().attributesOfItemAtPath(file)
+                        let attributes = try FileManager.default.attributesOfItem(atPath: file)
                         
-                        if let fileSize = attributes[NSFileSize] as? UInt {
+                        if let fileSize = attributes[FileAttributeKey.size] as? UInt {
                             
                             if fileSize < 5 * 1024 * 1024 {
                                 
-                                let url = NSURL(fileURLWithPath: file)
+                                let url = URL(fileURLWithPath: file)
                                 
                                 NSApp.appDelegate.upload(url)
                             }

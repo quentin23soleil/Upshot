@@ -14,13 +14,13 @@ class SettingsManager {
     
     var url: String {
         didSet {
-            PersistentStore.saveStandardObject(url, key: Key.URL)
+            PersistentStore.saveStandardObject(url as AnyObject, key: Key.URL)
         }
     }
     
     var launchAtLogin: Bool {
         didSet {
-            PersistentStore.saveStandardObject(launchAtLogin, key: Key.LaunchAtLogin)
+            PersistentStore.saveStandardObject(launchAtLogin as AnyObject, key: Key.LaunchAtLogin)
             if launchAtLogin {
                 LaunchManager.launchAtStartUp()
             }
@@ -32,11 +32,11 @@ class SettingsManager {
     
     var playSound: Bool {
         didSet {
-            PersistentStore.saveStandardObject(playSound, key: Key.PlaySound)
+            PersistentStore.saveStandardObject(playSound as AnyObject, key: Key.PlaySound)
         }
     }
     
-    private struct Key {
+    fileprivate struct Key {
         
         static let URL = "URLKey"
         static let LaunchAtLogin = "LaunchAtLoginKey"

@@ -14,59 +14,59 @@ class PersistentStore {
 
 extension PersistentStore {
     
-    class func delete(key key: String) {
+    class func delete(key: String) {
         
-        NSUserDefaults.standardUserDefaults().removeObjectForKey(key)
+        UserDefaults.standard.removeObject(forKey: key)
     }
 }
 
 extension PersistentStore {
     
-    class func saveObject(object: NSCoding, key: String) {
+    class func saveObject(_ object: NSCoding, key: String) {
         
-        let encodedData = NSKeyedArchiver.archivedDataWithRootObject(object)
+        let encodedData = NSKeyedArchiver.archivedData(withRootObject: object)
         
-        NSUserDefaults.standardUserDefaults().setObject(encodedData, forKey: key)
-        NSUserDefaults.standardUserDefaults().synchronize()
+        UserDefaults.standard.set(encodedData, forKey: key)
+        UserDefaults.standard.synchronize()
     }
     
-    class func saveObjects(objects: [NSCoding], key: String) {
+    class func saveObjects(_ objects: [NSCoding], key: String) {
         
         if objects.count > 0 {
             
-            var encodedObjects: [NSData] = []
+            var encodedObjects: [Data] = []
             
             for object in objects {
                 
-                let encodedData = NSKeyedArchiver.archivedDataWithRootObject(object)
+                let encodedData = NSKeyedArchiver.archivedData(withRootObject: object)
                 encodedObjects.append(encodedData)
             }
             
-            NSUserDefaults.standardUserDefaults().setObject(encodedObjects, forKey: key)
-            NSUserDefaults.standardUserDefaults().synchronize()
+            UserDefaults.standard.set(encodedObjects, forKey: key)
+            UserDefaults.standard.synchronize()
         }
     }
     
-    class func getObject<T: NSCoding>(key key: String) -> T? {
+    class func getObject<T: NSCoding>(key: String) -> T? {
         
-        if let encodedObject = NSUserDefaults.standardUserDefaults().objectForKey(key) as? NSData {
+        if let encodedObject = UserDefaults.standard.object(forKey: key) as? Data {
             
-            let object = NSKeyedUnarchiver.unarchiveObjectWithData(encodedObject) as! T
+            let object = NSKeyedUnarchiver.unarchiveObject(with: encodedObject) as! T
             
             return object
         }
         return nil
     }
     
-    class func getObjects<T: NSCoding>(key key: String) -> [T]? {
+    class func getObjects<T: NSCoding>(key: String) -> [T]? {
         
-        if let encodedObjects = NSUserDefaults.standardUserDefaults().objectForKey(key) as? [NSData] where encodedObjects.count > 0 {
+        if let encodedObjects = UserDefaults.standard.object(forKey: key) as? [Data], encodedObjects.count > 0 {
             
             var objects: [T] = []
             
             for encodedData in encodedObjects {
                 
-                let object = NSKeyedUnarchiver.unarchiveObjectWithData(encodedData) as! T
+                let object = NSKeyedUnarchiver.unarchiveObject(with: encodedData) as! T
                 objects.append(object)
             }
             return objects
@@ -78,29 +78,29 @@ extension PersistentStore {
 
 extension PersistentStore {
     
-    class func getStandardObject(key key: String) -> AnyObject? {
+    class func getStandardObject(key: String) -> AnyObject? {
         
-        return NSUserDefaults.standardUserDefaults().objectForKey(key)
+        return UserDefaults.standard.object(forKey: key) as AnyObject
     }
     
-    class func saveStandardObject(object: AnyObject, key: String) {
+    class func saveStandardObject(_ object: AnyObject, key: String) {
         
-        NSUserDefaults.standardUserDefaults().setObject(object, forKey: key)
-        NSUserDefaults.standardUserDefaults().synchronize()
+        UserDefaults.standard.set(object, forKey: key)
+        UserDefaults.standard.synchronize()
     }
 }
 
 extension PersistentStore {
     
-    class func getString(key key: String) -> String? {
+    class func getString(key: String) -> String? {
         return getStandardObject(key: key) as? String
     }
 
-    class func getInt(key key: String) -> Int? {
+    class func getInt(key: String) -> Int? {
         return getStandardObject(key: key) as? Int
     }
     
-    class func getBool(key key: String) -> Bool? {
+    class func getBool(key: String) -> Bool? {
         return getStandardObject(key: key) as? Bool
     }
     

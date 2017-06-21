@@ -15,11 +15,11 @@ class ClipboardManager {
     var pasteBoard : NSPasteboard
     
     init () {
-        pasteBoard = NSPasteboard.generalPasteboard()
+        pasteBoard = NSPasteboard.general()
 
     }
     
-    func save(str : String) -> Void {
+    func save(_ str : String) -> Void {
         pasteBoard.clearContents()
         pasteBoard.setString(str, forType: NSPasteboardTypeString)
     }

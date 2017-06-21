@@ -16,16 +16,16 @@ struct Storyboards {
             return NSStoryboard(name: self.identifier, bundle: nil)
         }
 
-        static func instantiateWindowControllerWithIdentifier(identifier: String) -> NSWindowController {
-            return self.storyboard.instantiateControllerWithIdentifier(identifier) as! NSWindowController
+        static func instantiateWindowControllerWithIdentifier(_ identifier: String) -> NSWindowController {
+            return self.storyboard.instantiateController(withIdentifier: identifier) as! NSWindowController
         }
 
-        static func instantiateViewControllerWithIdentifier(identifier: String) -> NSViewController {
-            return self.storyboard.instantiateControllerWithIdentifier(identifier) as! NSViewController
+        static func instantiateViewControllerWithIdentifier(_ identifier: String) -> NSViewController {
+            return self.storyboard.instantiateController(withIdentifier: identifier) as! NSViewController
         }
 
         static func instantiateSettingsWindowController() -> SettingsWindowController {
-            return self.storyboard.instantiateControllerWithIdentifier("SettingsWindowController") as! SettingsWindowController
+            return self.storyboard.instantiateController(withIdentifier: "SettingsWindowController") as! SettingsWindowController
         }
     }
 }
@@ -101,26 +101,26 @@ extension NSStoryboardSegue: SegueProtocol {
 
 //MARK: - NSViewController extension
 extension NSViewController {
-    func performSegue<T: SegueProtocol>(segue: T, sender: AnyObject?) {
+    func performSegue<T: SegueProtocol>(_ segue: T, sender: AnyObject?) {
         if let identifier = segue.identifier {
-            performSegueWithIdentifier(identifier, sender: sender)
+            self.performSegue(withIdentifier: identifier, sender: sender)
         }
     }
 
-    func performSegue<T: SegueProtocol>(segue: T) {
+    func performSegue<T: SegueProtocol>(_ segue: T) {
         performSegue(segue, sender: nil)
     }
 }
 
 //MARK: - NSWindowController extension
 extension NSWindowController {
-    func performSegue<T: SegueProtocol>(segue: T, sender: AnyObject?) {
+    func performSegue<T: SegueProtocol>(_ segue: T, sender: AnyObject?) {
         if let identifier = segue.identifier {
-            performSegueWithIdentifier(identifier, sender: sender)
+            self.performSegue(withIdentifier: identifier, sender: sender)
         }
     }
 
-    func performSegue<T: SegueProtocol>(segue: T) {
+    func performSegue<T: SegueProtocol>(_ segue: T) {
         performSegue(segue, sender: nil)
     }
 }

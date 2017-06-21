@@ -17,7 +17,7 @@ class LaunchManager {
         }
         
         let path = pathForScript()
-        let bundleID = NSBundle.mainBundle().bundleIdentifier!
+        let bundleID = Bundle.main.bundleIdentifier!
         
         let dict: NSDictionary = [
             "Label": bundleID,
@@ -25,30 +25,30 @@ class LaunchManager {
             "RunAtLoad": true
         ]
         
-        dict.writeToFile(path, atomically: false)
+        dict.write(toFile: path!, atomically: false)
     }
     
     class func removeLaunchAtStartUp() {
         
         if launchAtStartUpScriptExists(), let path = pathForScript() {
             
-            let fileManager = NSFileManager.defaultManager()
+            let fileManager = FileManager.default
             
-            try! fileManager.removeItemAtPath(path)
+            try! fileManager.removeItem(atPath: path)
         }
     }
     
-    private class func pathForScript() -> String! {
+    fileprivate class func pathForScript() -> String! {
         
         let paths = NSSearchPathForDirectoriesInDomains(
-            NSSearchPathDirectory.LibraryDirectory,
-            NSSearchPathDomainMask.UserDomainMask,
+            FileManager.SearchPathDirectory.libraryDirectory,
+            FileManager.SearchPathDomainMask.userDomainMask,
             true
         )
         
-        if let path = paths.first, bundleID = NSBundle.mainBundle().bundleIdentifier {
+        if let path = paths.first, let bundleID = Bundle.main.bundleIdentifier {
             
-            return (path as NSString).stringByAppendingPathComponent("LaunchAgents/\(bundleID).plist")
+            return (path as NSString).appendingPathComponent("LaunchAgents/\(bundleID).plist")
         }
         
         return nil
@@ -56,9 +56,9 @@ class LaunchManager {
     
     class func launchAtStartUpScriptExists() -> Bool {
         
-        let fileManager = NSFileManager.defaultManager()
+        let fileManager = FileManager.default
         
-        if let path = pathForScript() where fileManager.fileExistsAtPath(path) {
+        if let path = pathForScript(), fileManager.fileExists(atPath: path) {
             return true
         }
         return false
