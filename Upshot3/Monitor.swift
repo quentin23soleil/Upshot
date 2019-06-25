@@ -2,8 +2,8 @@
 //  Monitor.swift
 //  Upshot
 //
-//  Created by Quentin Dommerc on 17/07/15.
-//  Copyright © 2015 Quentin Dommerc. All rights reserved.
+//  Created by Cédric Eugeni on 25/06/2019.
+//  Copyright © 2019 Cédric Eugeni. All rights reserved.
 //
 
 import Foundation
@@ -58,21 +58,21 @@ class Monitor {
                 // Get the path to the screenshot
                 if let path = item.value(forAttribute: NSMetadataItemPathKey) as? String,
                     let creationDate = item.value(forAttribute: NSMetadataItemFSCreationDateKey) as? Date {
-                        let screenshotName = ((path as NSString).lastPathComponent as NSString).deletingPathExtension
-                        
-                        let oldestAllowedCreationDate = Date(timeIntervalSinceNow: -30) // 30 seconds ago
-                        let defaultScreenshotDirectoryPath = ((path as NSString).deletingLastPathComponent as NSString).standardizingPath
-                        let currentScreenshotDirectoryPath = (screenshotDirectoryPath as NSString).standardizingPath
-                        
-                        let isInScreenshotFolder = currentScreenshotDirectoryPath == defaultScreenshotDirectoryPath
-                        let isRecentlyCreated = creationDate.compare(oldestAllowedCreationDate) == .orderedDescending
-                        let isBlacklisted = blacklist.contains(screenshotName)
-                        
-                        // Ensure that the screenshot detected is from the right folder and isn't blacklisted
-                        if isRecentlyCreated && isInScreenshotFolder && !isBlacklisted {
-                            callback(URL(fileURLWithPath: path))
-                            blacklist.append(screenshotName)
-                        }
+                    let screenshotName = ((path as NSString).lastPathComponent as NSString).deletingPathExtension
+                    
+                    let oldestAllowedCreationDate = Date(timeIntervalSinceNow: -30) // 30 seconds ago
+                    let defaultScreenshotDirectoryPath = ((path as NSString).deletingLastPathComponent as NSString).standardizingPath
+                    let currentScreenshotDirectoryPath = (screenshotDirectoryPath as NSString).standardizingPath
+                    
+                    let isInScreenshotFolder = currentScreenshotDirectoryPath == defaultScreenshotDirectoryPath
+                    let isRecentlyCreated = creationDate.compare(oldestAllowedCreationDate) == .orderedDescending
+                    let isBlacklisted = blacklist.contains(screenshotName)
+                    
+                    // Ensure that the screenshot detected is from the right folder and isn't blacklisted
+                    if isRecentlyCreated && isInScreenshotFolder && !isBlacklisted {
+                        callback(URL(fileURLWithPath: path))
+                        blacklist.append(screenshotName)
+                    }
                 }
             }
         }
@@ -91,4 +91,3 @@ class Monitor {
         return NSSearchPathForDirectoriesInDomains(.desktopDirectory, .userDomainMask, true)[0]
     }
 }
-

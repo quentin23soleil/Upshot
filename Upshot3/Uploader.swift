@@ -36,14 +36,28 @@ class Uploader {
         
         let url = Uploader.uploadURL(fileURL: fileURL)
         
-        Alamofire.upload(fileURL, to: url).responseString(completionHandler: {response in
-            
-            if let result = response.result.value {
-                callback(.success(result))
-            } else {
+        guard let data = try? Data(contentsOf: url) else {
+            callback(.failure)
+            return
+        }
+        
+        Alamofire.upload(multipartFormData: { (multipartFormaData) in
+            multipartFormaData.append(data, withName: "image")
+        }, to: url) { (encodingResult) in
+            switch encodingResult {
+            case .success(let upload, _, _):
+                upload.responseString { response in
+                    
+                    if let result = response.result.value {
+                        callback(.success(result))
+                    } else {
+                        callback(.failure)
+                    }
+                }
+            case .failure:
                 callback(.failure)
             }
-        })
+        }
     }
 }
 

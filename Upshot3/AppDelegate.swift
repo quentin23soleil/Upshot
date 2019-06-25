@@ -1,38 +1,31 @@
-
 //
 //  AppDelegate.swift
-//  Upshot
+//  Upshot3
 //
-//  Created by Quentin Dommerc on 16/07/15.
-//  Copyright © 2015 Quentin Dommerc. All rights reserved.
+//  Created by Cédric Eugeni on 25/06/2019.
+//  Copyright © 2019 Cédric Eugeni. All rights reserved.
 //
 
 import Cocoa
-import Foundation
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate, NSMetadataQueryDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate {
 
     let defaults = UserDefaults.standard
     var monitor : Monitor!
     let statusBarManager = StatusBarItemManager()
     
     let settingsWindowController = Storyboards.Main.instantiateSettingsWindowController()
-    
+
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        
-        quitIfAlreadyRunning()
-        
-        defaults.register(defaults: ["NSApplicationCrashOnExceptions": true])
-        
-        monitor = Monitor(callback: screenshotDetected)
-        monitor.startMonitoring()
+        debugPrint("toto")
     }
-    
+
     func applicationWillTerminate(_ aNotification: Notification) {
-        
-        monitor?.stopMonitoring()
+        // Insert code here to tear down your application
     }
+
+
 }
 
 extension AppDelegate {
@@ -93,7 +86,7 @@ extension AppDelegate {
     func showSettingsWindow() {
         
         NSApp.activate(ignoringOtherApps: true)
-
+        
         settingsWindowController.window?.center()
         settingsWindowController.showWindow(nil)
     }
@@ -105,4 +98,3 @@ extension NSApplication {
         return delegate as! AppDelegate
     }
 }
-

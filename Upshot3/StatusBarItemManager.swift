@@ -2,15 +2,15 @@
 //  StatusBarItemManager.swift
 //  Upshot
 //
-//  Created by Quentin Dommerc on 18/07/15.
-//  Copyright © 2015 Quentin Dommerc. All rights reserved.
+//  Created by Cédric Eugeni on 25/06/2019.
+//  Copyright © 2019 Cédric Eugeni. All rights reserved.
 //
 
 import Foundation
 import Cocoa
 
 class StatusBarItemManager : NSObject{
-    var statusBar = NSStatusBar.system()
+    var statusBar = NSStatusBar.system
     var statusBarItem : NSStatusItem = NSStatusItem()
     var menu: NSMenu = NSMenu()
     var settingsMenuItem : NSMenuItem = NSMenuItem()
@@ -24,11 +24,12 @@ class StatusBarItemManager : NSObject{
     override init() {
         super.init()
         
-        statusBarItem = statusBar.statusItem(withLength: NSVariableStatusItemLength)
+        statusBarItem = statusBar.statusItem(withLength: NSStatusItem.variableLength)
         statusBarItem.menu = menu
-        statusBarItem.image = standbyImage
+        statusBarItem.button?.image = standbyImage
+//        statusBarItem.image = standbyImage
         
-        statusBarItem.button?.window?.registerForDraggedTypes([NSFilenamesPboardType])
+        statusBarItem.button?.window?.registerForDraggedTypes([.fileURL])
         statusBarItem.button?.window?.delegate = self
         
         settingsMenuItem.title = "Settings"
@@ -40,12 +41,12 @@ class StatusBarItemManager : NSObject{
         menu.addItem(NSMenuItem.separator())
         
         terminateMenuItem.title = "Quit"
-        terminateMenuItem.action = #selector(NSApplication.shared().terminate)
+        terminateMenuItem.action = #selector(NSApplication.shared.terminate)
         terminateMenuItem.keyEquivalent = ""
         menu.addItem(terminateMenuItem)
     }
     
-    func reset(_ timer : Timer) {
+    @objc func reset(_ timer : Timer) {
         statusBarItem.image = standbyImage
     }
     
@@ -63,7 +64,7 @@ class StatusBarItemManager : NSObject{
         Timer.scheduledTimer(timeInterval: time, target: self, selector: #selector(StatusBarItemManager.reset(_:)), userInfo: nil, repeats: false)
     }
     
-    func openSettings(_ object: AnyObject) {
+    @objc func openSettings(_ object: AnyObject) {
         
         NSApp.appDelegate.showSettingsWindow()
     }
@@ -81,10 +82,10 @@ extension StatusBarItemManager: NSDraggingDestination {
     
     func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
         
-        let pasteBoard = sender.draggingPasteboard()
+        let pasteBoard = sender.draggingPasteboard
         
-        if let types = pasteBoard.types, types.contains(NSFilenamesPboardType),
-            let files = pasteBoard.propertyList(forType: NSFilenamesPboardType) as? [String] {
+        if let types = pasteBoard.types, types.contains(.fileURL),
+            let files = pasteBoard.propertyList(forType: .fileURL) as? [String] {
             
             for file in files {
                 
@@ -115,4 +116,3 @@ extension StatusBarItemManager: NSDraggingDestination {
         return true
     }
 }
-
